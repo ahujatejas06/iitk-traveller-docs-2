@@ -99,3 +99,21 @@ Re-initializes the value stored at the address pointed to by mem_3 to 0.
 
 ## hall_13_c
 Re-initializes the value of the condition variable to 0.
+
+## rm_1 
+Increments the mem_1 pointer on the memory tape. Exceptions are generated if it moves after the end of the memory tape.
+
+## rm_2
+Increments the mem_2 pointer on the memory tape. Exceptions are generated if it moves after the end of the memory tape.
+
+## rm_3
+Increments the mem_3 pointer on the memory tape. Exceptions are generated if it moves after the end of the memory tape.
+
+## kd_1
+Decrements the mem_1 pointer on the memory tape. Exceptions are generated if it moves before position 0.
+
+## kd_2
+Decrements the mem_2 pointer on the memory tape. Exceptions are generated if it moves before position 0.
+
+## kd_3
+Decrements the mem_3 pointer on the memory tape. Exceptions are generated if it moves before position 0.
