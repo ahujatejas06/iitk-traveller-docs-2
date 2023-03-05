@@ -1,8 +1,9 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
+title: IIT-K Traveller Documentation
+description: A guide to understanding the IITK Traveller Esolang
 theme: just-the-docs
-
-url: https://just-the-docs.github.io
-
-aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+callouts:
+  info:
+    title: Information
+    color: green
+search:
+  button: true
