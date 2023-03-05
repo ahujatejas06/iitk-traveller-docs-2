@@ -100,20 +100,50 @@ Re-initializes the value stored at the address pointed to by mem_3 to 0.
 ## hall_13_c
 Re-initializes the value of the condition variable to 0.
 
-## rm_1 
-Increments the mem_1 pointer on the memory tape. Exceptions are generated if it moves after the end of the memory tape.
+## rm_1
+Increments the address stored at mem_1 by 1.
 
 ## rm_2
-Increments the mem_2 pointer on the memory tape. Exceptions are generated if it moves after the end of the memory tape.
+Increments the address stored at mem_2 by 1.
 
 ## rm_3
-Increments the mem_3 pointer on the memory tape. Exceptions are generated if it moves after the end of the memory tape.
+Increments the address stored at mem_3 by 1.
 
 ## kd_1
-Decrements the mem_1 pointer on the memory tape. Exceptions are generated if it moves before position 0.
+Decrements the address stored at mem_1 by 1.
 
 ## kd_2
-Decrements the mem_2 pointer on the memory tape. Exceptions are generated if it moves before position 0.
+Decrements the address stored at mem_2 by 1.
 
 ## kd_3
-Decrements the mem_3 pointer on the memory tape. Exceptions are generated if it moves before position 0.
+Decrements the address stored at mem_3 by 1.
+
+## airstrip_takeoff_1
+prints one character at a time after integer to ascii conversion of the value pointed to by mem_1. The pointer mem_1 is incremented until the flag is encountered on mem_flag[mem_1].
+
+## airstrip_takeoff_2
+prints one character at a time after integer to ascii conversion of the value pointed to by mem_2. The pointer mem_2 is incremented until the flag is encountered on mem_flag[mem_2].
+
+## pronite_1
+Sets the flag to true at the address pointed to by mem_1. It sets the value pointed to by mem_1 to 0.
+
+## pronite_2
+Sets the flag to true at the address pointed to by mem_2. It sets the value pointed to by mem_2 to 0.
+
+## events_1
+Checks if the flag is set at the address pointed to by mem_1. If the flag is set, then the traveller is transported to the location events_1_t. Otherwise the traveller is transported to the location events_1_f. These are actual landmarks and can be used in the program like any other landmark. This operation is not valid for EOS literals.
+
+### events_1_t
+The traveller is transported to this location if the flag is set at the address pointed to by mem_1.
+
+### events_1_f
+The traveller is transported to this location if the flag is not set at the address pointed to by mem_1.
+
+## events_2
+Checks if the flag is set at the address pointed to by mem_2. If the flag is set, then the traveller is transported to the location events_2_t. Otherwise the traveller is transported to the location events_2_f. These are actual landmarks and can be used in the program like any other landmark. This operation is not valid for EOS literals.
+
+### events_2_t
+The traveller is transported to this location if the flag is set at the address pointed to by mem_2.
+
+### events_2_f
+The traveller is transported to this location if the flag is not set at the address pointed to by mem_2.

@@ -71,10 +71,20 @@ If there is no valid path available, an error will be returned. The start and fi
 | hall_13_1               |          mem[mem_1] = 0 |
 | hall_13_2               |          mem[mem_2] = 0 |
 | hall_13_3               |          mem[mem_3] = 0 |
-| hall_13_c               |          cond = 0
-| rm_1                    |          mem_1++
-| rm_2                    |          mem_2++
-| rm_3                    |          mem_3++
-| kd_1                    |          mem_1--
-| kd_2                    |          mem_2--
-| kd_3                    |          mem_3--
+| hall_13_c               |          cond = 0 |
+| rm_1                    |          mem_1++ |
+| rm_2                    |          mem_2++ |
+| rm_3                    |          mem_3++   |
+| kd_1                    |          mem_1-- |
+| kd_2                    |          mem_2-- |
+| kd_3                    |          mem_3-- |
+| airstrip_takeoff_1      |          prints one character (conversion of int to ascii) at a time from mem[mem_1] until the flag is encountered|
+| airstrip_takeoff_2      |          prints one character (conversion of int to ascii) at a time from mem[mem_2] until the flag is encountered| 
+| pronite_1               |          sets flag to true at mem_flag[mem_1];    
+| pronite_2               |          sets flag to true at mem_flag[mem_2];                    
+| events_1                |          checks if there is a flag at mem1 location (mem_flag[mem_1] == 1). If yes, you are teleported to events_1_t, else to events_1_f. |         
+| events_1_t              |          Path followed if events_1 is true |
+| events_1_f              |          Path followed if events_1 is false |
+| events_2                |          checks if there is a flag at mem2 location (mem_flag[mem_2] == 1). If yes, you are teleported to events_2_t, else to events_2_f. |
+| events_2_t              |          Path followed if events_2 is true |
+| events_2_f              |          Path followed if events_2 is false |
