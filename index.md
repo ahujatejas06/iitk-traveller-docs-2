@@ -31,9 +31,9 @@ If there is no valid path available, an error will be returned. The `start` and 
 ## Books
 Each magical book will be open at a particular page at any moment of time, and you can write one number at each page in the book. Since the books are magical, they have a pecuiliar property that writing any number on any page of one book automatically reflects in the other books as well. So, if you write, for example, the number 5 on page 4 of one book, turning to page 5 on any other book will also show the number 5. You can overwrite previously written numbers, the changes which will also be reflected to the other books. However, the page number you can have open in any book is independent of any other, only the contents are synchornized at all times. 
 
-If you are familiar with the terminology, you can visualize the three books are pointers on a memory tape of infinite length.
+If you are familiar with the terminology, you can visualize the three books are pointers on a memory tape of **infinite** length.
 
-The page numbers in the books start from 0, and there are infinite pages in each book.
+The page numbers in the books start from 0, and there are **infinite** pages in each book.
 
 - `mem_1` - The page number currently open in the first magical book
 - `mem_2` - The page number currently open in the second magical book
