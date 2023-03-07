@@ -22,7 +22,7 @@ Standard multiplication operation. Multiplies the integers stored at the address
 Standard subtraction operation. Subtracts the integers stored at the addresses pointed to by mem_1 and mem_2 in order (mem\[mem_1\] - mem\[mem_2\]) and stores them at the address pointed to my mem_3. This operation is not valid for EOS literals.
 
 ## hall_12
-Standard subtraction operation. Subtracts the integers stored at the addresses pointed to by mem_1 and mem_2 in order (mem\[mem_1\] / mem\[mem_2\]) and stores them at the address pointed to my mem_3. This operation is not valid for EOS literals.
+Standard division operation. Divides the integers stored at the addresses pointed to by mem_1 and mem_2 in order (mem\[mem_1\] / mem\[mem_2\]) and stores them at the address pointed to my mem_3. This operation is not valid for EOS literals.
 
 ## mt_1_3
 Copies the value stored at the address pointed to by mem_1 to the address pointed to by mem_3.
