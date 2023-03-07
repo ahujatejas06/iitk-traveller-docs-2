@@ -135,11 +135,29 @@ Decrements the address stored at mem_2 by 1.
 ## kd_3
 Decrements the address stored at mem_3 by 1.
 
+## eshop_1
+Squares the value stored at the address pointed to by mem_1 and stores it at the address pointed to by mem_1. This operation isn't valid for EOS literals.
+
+## eshop_2
+Squares the value stored at the address pointed to by mem_2 and stores it at the address pointed to by mem_2. This operation isn't valid for EOS literals.  
+
+## doaa_1
+Prints the ASCII value of the integer stored at mem[mem_1]. This will result in an error if the value stored at mem[mem_1] does not exist or is not convertible to a valid ASCII character.
+
+## doaa_2
+Prints the ASCII value of the integer stored at mem[mem_2]. This will result in an error if the value stored at mem[mem_2] does not exist or is not convertible to a valid ASCII character.
+
+## airstrip_land_1
+This landmark takes in input of a string. Each character of the string is converted to its ASCII value and stored at the address pointed to by mem_1. The pointer mem_1 is incremented until the EOS character is encountered. The flag is set to true and 0 is stored at the address pointed to by mem_1 at the location of the EOS character.
+
+## airstrip_land_2
+This landmark takes in input of a string. Each character of the string is converted to its ASCII value and stored at the address pointed to by mem_2. The pointer mem_2 is incremented until the EOS character is encountered. The flag is set to true and 0 is stored at the address pointed to by mem_2 at the location of the EOS character.
 ## airstrip_takeoff_1
 prints one character at a time after integer to ascii conversion of the value pointed to by mem_1. The pointer mem_1 is incremented until the flag is encountered on mem_flag[mem_1].
 
 ## airstrip_takeoff_2
 prints one character at a time after integer to ascii conversion of the value pointed to by mem_2. The pointer mem_2 is incremented until the flag is encountered on mem_flag[mem_2].
+
 
 ## pronite_1
 Sets the flag to true at the address pointed to by mem_1. It sets the value pointed to by mem_1 to 0.
@@ -147,6 +165,8 @@ Sets the flag to true at the address pointed to by mem_1. It sets the value poin
 ## pronite_2
 Sets the flag to true at the address pointed to by mem_2. It sets the value pointed to by mem_2 to 0.
 
+{: .info}
+EOS character is a special character that is used to denote the end of a string. As a normal EOS character is converted to 0 in the ASCII table, which could be difficult to distinguish from an integer 0, we have introduced the concept of string flags. A string flag is a boolean value that is set to true at the location of the EOS character. This flag is used to determine the end of a string and it can be set to true (using the pronite ground locations) at any page of the book.
 ## events_1
 ```mermaid
     flowchart TD

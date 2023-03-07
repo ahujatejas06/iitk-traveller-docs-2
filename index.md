@@ -14,19 +14,6 @@ You are a traveller who has just entered the magical land of IIT Kanpur. Like an
 Armed with your items, you take out your bicycle and decide to start planning your travel. 
 
 # Overview
-## Syntax
-Each command consists of 3 comma-separated tokens ended with a newline.
-
-- Starting Landmark
-- Condition Value
-- Finishing Landmark
-
-## Execution Flow
-The execution flow can be visualized as traversing a graph following its edges. Your journey will start at the `start` node and will end as soon as the you reaches the `finish` node. Therefore each command represents a directed edge in the graph from the starting landmark to the finishing landmark. The condition value specifies which edge to be traversed from a particular node. 
-
-Only the commands with condition value equal to the value of `cond` will be available to follow.
-
-If there is no valid path available, an error will be returned. The `start` and `finish` node must be present in the code otherwise an error will be generated.
 
 ## Books
 Each magical book will be open at a particular page at any moment of time, and you can write one number at each page in the book. Since the books are magical, they have a pecuiliar property that writing any number on any page of one book automatically reflects in the other books as well. So, if you write, for example, the number 5 on page 4 of one book, turning to page 5 on any other book will also show the number 5. You can overwrite previously written numbers, the changes which will also be reflected to the other books. However, the page number you can have open in any book is independent of any other, only the contents are synchornized at all times. 
@@ -35,16 +22,18 @@ If you are familiar with the terminology, you can visualize the three books are 
 
 The page numbers in the books start from 0, and there are **infinite** pages in each book.
 
-- `mem_1` - The page number currently open in the first magical book
-- `mem_2` - The page number currently open in the second magical book
-- `mem_3` - The page number currently open in the third magical book
+- `mem_1` - The page number currently open in the first magical book. **(Default/Initial value: 0)**
+- `mem_2` - The page number currently open in the second magical book. **(Default/Initial value: 1)**
+- `mem_3` - The page number currently open in the third magical book. **(Default/Initial value: 2)**
 
+{: .info}
 `mem[mem_1]` will denote the number written on page `mem_1` in any book.
 
 
 ## Compass
 
-The compass will guide your travels by telling you where to go next from any landmark. At any instant of time, the compass will display a number, which you can change on your own, or in the course of your travels. At any step in your journey, you can only travel next to a code line which has the condition value equal to the current value of the compass (also referred to as `cond`).
+The compass will guide your travels by telling you where to go next from any landmark. At any instant of time, the compass will display a number, which you can change on your own, or in the course of your travels. At any step in your journey, you can only travel next to a code line which has the condition value equal to the current value of the compass (also referred to as `cond`). **The default/initial value of the compass is 0.**
+There can only be one such code line from a particular landmark, and if there are multiple code lines from the same landmark with the same condition value, an error will be generated.
 
 ## Mysterious box
 
@@ -86,13 +75,19 @@ The following table contains the contents of the dictionary that you have been p
 | hall_13_1               |          mem[mem_1] = 0 |
 | hall_13_2               |          mem[mem_2] = 0 |
 | hall_13_3               |          mem[mem_3] = 0 |
-| hall_13_c               |          cond = 0
-| rm_1                    |          mem_1++
-| rm_2                    |          mem_2++
-| rm_3                    |          mem_3++
-| kd_1                    |          mem_1--
-| kd_2                    |          mem_2--
-| kd_3                    |          mem_3--
+| hall_13_c               |          cond = 0|
+| rm_1                    |          mem_1++ |
+| rm_2                    |          mem_2++ |
+| rm_3                    |          mem_3++ |
+| kd_1                    |          mem_1-- |
+| kd_2                    |          mem_2-- |
+| kd_3                    |          mem_3-- |
+| eshop_1                 |          mem[mem_1] = mem[mem_1] * mem[mem_1] |
+| eshop_2                 |          mem[mem_2] = mem[mem_2] * mem[mem_2] |
+| doaa_1                  |          Prints the ASCII value of the integer stored at mem[mem_1] |
+| doaa_2                  |          Prints the ASCII value of the integer stored at mem[mem_2] |
+| airstrip_land_1         |          Takes input of a string with each character being stored as an integer (ASCII Converted) incrementally starting at mem_1 |
+| airstrip_land_2         |          Takes input of a string with each character being stored as an integer (ASCII Converted) incrementally starting at mem_2 |
 | airstrip_takeoff_1      |          prints one character (conversion of int to ascii) at a time from mem[mem_1] until the flag is encountered|
 | airstrip_takeoff_2      |          prints one character (conversion of int to ascii) at a time from mem[mem_2] until the flag is encountered| 
 | pronite_1               |          mem_flag[mem_1] = 1;    
@@ -104,5 +99,24 @@ The following table contains the contents of the dictionary that you have been p
 | events_2_t              |          Path followed if events_2 is true |
 | events_2_f              |          Path followed if events_2 is false |
 
+## Syntax
+Each command consists of 3 comma-separated tokens ended with a newline.
+
+- Starting Landmark
+- Condition Value
+- Finishing Landmark
+
+## Execution Flow
+The execution flow can be visualized as traversing a graph following its edges. Your journey will start at the `start` node and will end as soon as the you reaches the `finish` node. Therefore each command represents a directed edge in the graph from the starting landmark to the finishing landmark. The condition value specifies which edge to be traversed from a particular node. 
+
+Only the commands with condition value equal to the value of `cond` will be available to follow.
+
+If there is no valid path available, an error will be returned. 
+
+{: .info}
+The `start` and `finish` node must be present in the code otherwise an error will be generated.
+
+{: .info}
+The traversal should start at the `start` node and end at the `finish` node. The traversal ends as soon as you reach the `finish` node.
 # About the Language
 IITK - Traveller is an esoteric language designed by Programming Club,IIT Kanpur. Started as a fun winter project, the construct of the language is partially inspired by esolangs 3var and Taxi, and its major goal is to introduce IITK peeps to esolangs and provide them with a relatable, challenging and creative construct, in case they have been bored using the similar language constructs like C/C++,Java,Python etc.
