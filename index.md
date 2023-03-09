@@ -127,5 +127,9 @@ Moreover, as specified earlier, at any node there should not be more than one pa
 
 {: .info}
 The traversal should start at the `start` node and end at the `finish` node. The traversal ends as soon as you reach the `finish` node.
+
+{: .info}
+The current implementation of this langauge does not support more that 10<sup>6</sup> operations.
+
 # About the Language
 IITK - Traveller is an esoteric language designed by Programming Club,IIT Kanpur. Started as a fun winter project, the construct of the language is partially inspired by esolangs 3var and Taxi, and its major goal is to introduce IITK peeps to esolangs and provide them with a relatable, challenging and creative construct, in case they have been bored using the similar language constructs like C/C++,Java,Python etc.
