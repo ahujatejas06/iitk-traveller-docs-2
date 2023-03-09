@@ -151,10 +151,10 @@ Takes a single charcter as input and stores its ASCII value at `mem[mem_1]`. Suc
 Takes a single charcter as input and stores its ASCII value at `mem[mem_2]`. Such inputs are terminated by a space or newline.
 
 ## nankari_gate_out_1
-Prints the character corresponding to the integer stored at `mem[mem_1]`. This will result in an error if the value stored at `mem[mem_1]` does not exist or is not convertible to a valid ASCII character. The printed character is followed by a space.
+Prints the character corresponding to the integer stored at `mem[mem_1]`. This will result in an error if the value stored at `mem[mem_1]` does not exist or is not convertible to a valid ASCII character.
 
 ## nankari_gate_out_2
-Prints the character corresponding to the integer stored at `mem[mem_2]`. This will result in an error if the value stored at `mem[mem_2]` does not exist or is not convertible to a valid ASCII character. The printed character is followed by a space.
+Prints the character corresponding to the integer stored at `mem[mem_2]`. This will result in an error if the value stored at `mem[mem_2]` does not exist or is not convertible to a valid ASCII character.
 
 ## airstrip_land_1
 Takes a string as input and stores the ASCII value of the i<sup>th</sup> (0 indexing) character at `mem[mem_1 + i]` ending with a special EOS character. During this operation, the value of `mem_1` does not change. Such inputs are terminated only by a newline. <br>
