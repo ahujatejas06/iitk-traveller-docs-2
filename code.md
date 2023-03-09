@@ -7,16 +7,16 @@ nav_order : 1
 # Landmark Definitions
 
 ## iit_gate_in_1
-Takes input from the console to the address in the memory tape pointed to by `mem_1`. Input is a signed 32-bit integer.
+Takes input from the console to the address in the memory tape pointed to by `mem_1`. Input is a signed 32-bit integer. Such inputs are terminated by a space or newline.
 
 ## iit_gate_in_2
-Takes input from the console to the address in the memory tape pointed to by `mem_2`. Input is a signed 32-bit integer.
+Takes input from the console to the address in the memory tape pointed to by `mem_2`. Input is a signed 32-bit integer. Such inputs are terminated by a space or newline.
 
 ## hall_2
 Standard addition operation. Adds the integers stored at the addresses pointed to by `mem_1` and `mem_2` and stores them at the address pointed to my `mem_3`. This operation is not valid for EOS literals.
 
 ## hall_3
-Standard multiplication operation. Multiplies the integers stored at the addresses pointed to by `mem_1` and `mem_2` and stores them at the address pointed to my mem_3. This operation is not valid for EOS literals.
+Standard multiplication operation. Multiplies the integers stored at the addresses pointed to by `mem_1` and `mem_2` and stores them at the address pointed to by `mem_3`. This operation is not valid for EOS literals.
 
 ## hall_5
 Standard subtraction operation. Subtracts the integers stored at the addresses pointed to by `mem_1` and `mem_2` in order (`mem[mem_1]` - `mem[mem_2]`) and stores them at the address pointed to my `mem_3`. This operation is not valid for EOS literals.
@@ -37,10 +37,10 @@ Copies the value stored at the address pointed to by `mem_3` to the address poin
 Copies the value stored at the address pointed to by `mem_3` to the address pointed to by `mem_2`.
 
 ## iit_gate_out_1
-Prints the value stored at the address pointed to by `mem_1` to the console.
+Prints the signed 32-bit integer value stored at the address pointed to by `mem_1` to the console. The printed number is followed by a space.
 
 ## iit_gate_out_2
-Prints the value stored at the address pointed to by `mem_2` to the console.
+Prints the signed 32-bit integer value stored at the address pointed to by `mem_2` to the console. The printed number is followed by a space.
 
 ## lecture_hall_gt
 ```mermaid
@@ -93,17 +93,20 @@ Increments the value stored at the address pointed to by `mem_1` by 1. This oper
 ## oat_stairs_2
 Increments the value stored at the address pointed to by `mem_2` by 1. This operation is not valid for EOS literals.
 
-## oat_stairs_c
-Increments the value of the condition (`cond`) variable by 1.
-
 ## southern_labs_1
 Decrements the value stored at the address pointed to by `mem_1` by 1. This operation is not valid for EOS literals.
 
 ## southern_labs_2
 Decrements the value stored at the address pointed to by `mem_2` by 1. This operation is not valid for EOS literals.
 
-## southern_labs_c
-Decrements the value of the condition variable by 1. This operation is not valid for EOS literals.
+## oat_stage / oat_stage[i]
+Increments the value of the `cond` with parameter (i) passed to it. The parameter i is a signed 32-bit integer. Thus passing a negative value will indeed decrement the value of `cond`. 
+
+{: .info}
+The name of the landmark is `oat_stage`. Thus oat_stage[1] or oat_stage[2] will represent the same location and not two different locations. Moreover in the syntax of the langauge the parameter is to passed only while specifying oat_stage as the finishing landmark. When specifying oat_stage as the starting landmark it should be referenced as just **oat_stage** without any parameters.<br>
+In short the following syntax has to be followed: <br>
+`[Starting Landmark], [Condition Value], oat_stage[i]` <br>
+`oat_stage, [Condition Value], [Finishing Landmark]`
 
 ## hall_13_1
 Re-initializes the value stored at the address pointed to by `mem_1` to 0.
@@ -141,32 +144,52 @@ Squares the value stored at the address pointed to by `mem_1` and stores it at t
 ## eshop_2
 Squares the value stored at the address pointed to by `mem_2` and stores it at the address pointed to by `mem_2`. This operation isn't valid for EOS literals.  
 
-## doaa_1
-Prints the ASCII value of the integer stored at `mem[mem_1]`. This will result in an error if the value stored at `mem[mem_1]` does not exist or is not convertible to a valid ASCII character.
+## nankari_gate_in_1
+Takes a single charcter as input and stores its ASCII value at `mem[mem_1]`. Such inputs are terminated by a space or newline.
 
-## doaa_2
-Prints the ASCII value of the integer stored at `mem[mem_2]`. This will result in an error if the value stored at `mem[mem_2]` does not exist or is not convertible to a valid ASCII character.
+## nankari_gate_in_2
+Takes a single charcter as input and stores its ASCII value at `mem[mem_2]`. Such inputs are terminated by a space or newline.
+
+## nankari_gate_out_1
+Prints the character corresponding to the integer stored at `mem[mem_1]`. This will result in an error if the value stored at `mem[mem_1]` does not exist or is not convertible to a valid ASCII character. The printed character is followed by a space.
+
+## nankari_gate_out_2
+Prints the character corresponding to the integer stored at `mem[mem_2]`. This will result in an error if the value stored at `mem[mem_2]` does not exist or is not convertible to a valid ASCII character. The printed character is followed by a space.
 
 ## airstrip_land_1
-This landmark takes in input of a string. Each character of the string is converted to its ASCII value and stored at the address pointed to by `mem_1`. The pointer `mem_1` is incremented until the EOS character is encountered. The flag is set to true and 0 is stored at the address pointed to by `mem_1` at the location of the EOS character.
+Takes a string as input and stores the ASCII value of the i<sup>th</sup> (0 indexing) character at `mem[mem_1 + i]` ending with a special EOS character. During this operation, the value of `mem_1` does not change. Such inputs are terminated only by a newline. <br>
+For example: <br>
+**Input**: Hello<br>
+**Before the operation**<br>
+`mem_1 = 3`<br>
+`mem[3 .. 8] = [0, 0, 0, 0, 0, 0]`<br>
+**After the operation**<br>
+`mem_1 = 3`<br>
+`mem[3 .. 8] = [104, 101, 108, 108, 111, EOS]`<br>
 
 ## airstrip_land_2
-This landmark takes in input of a string. Each character of the string is converted to its ASCII value and stored at the address pointed to by `mem_2`. The pointer `mem_2` is incremented until the EOS character is encountered. The flag is set to true and 0 is stored at the address pointed to by `mem_2` at the location of the EOS character.
+Takes a string as input and stores the ASCII value of the i<sup>th</sup> (0 indexing) character at `mem[mem_2 + i]` ending with a special EOS character. During this operation, the value of `mem_2` does not change. Such inputs are terminated only by a newline.
+
 ## airstrip_takeoff_1
-prints one character at a time after integer to ascii conversion of the value pointed to by `mem_1`. The pointer `mem_1` is incremented until the flag is encountered on `mem_flag[mem_1]`.
+Prints a string where the i<sup>th</sup> (0 indexing) character corresponds to the ASCII value stored `mem[mem_1 + i]`. The string is formed by concating the characters corresponding to the ascii value stored at every subsequent index starting from `mem_1` till an EOS literal is encountered. During this operation, the value of `mem_1` does not change.<br>
+For example: <br>
+**Before the operation**<br>
+`mem_1 = 3`<br>
+`mem[3 .. 8] = [104, 101, 108, 108, 111, EOS]`<br>
+**After the operation**<br>
+`mem_1 = 3`<br>
+`mem[3 .. 8] = [104, 101, 108, 108, 111, EOS]`<br>
+**Output** : Hello<br>
 
 ## airstrip_takeoff_2
-prints one character at a time after integer to ascii conversion of the value pointed to by `mem_2`. The pointer `mem_2` is incremented until the flag is encountered on `mem_flag[mem_2]`.
-
+Prints a string where the i<sup>th</sup> (0 indexing) character corresponds to the ASCII value stored `mem[mem_2 + i]`. The string is formed by concating the characters corresponding to the ascii value stored at every subsequent index starting from `mem_2` till an EOS literal is encountered. During this operation, the value of `mem_2` does not change.
 
 ## pronite_1
-Sets the flag to true at the address pointed to by `mem_1`. It sets the value pointed to by `mem_1` to 0.
+Inserts an EOS literal at `mem[mem_1]`
 
 ## pronite_2
-Sets the flag to true at the address pointed to by `mem_2`. It sets the value pointed to by `mem_2` to 0.
+Inserts an EOS literal at `mem[mem_2]`
 
-{: .info}
-EOS character is a special character that is used to denote the end of a string. As a normal EOS character is converted to 0 in the ASCII table, which could be difficult to distinguish from an integer 0, we have introduced the concept of string flags. A string flag is a boolean value that is set to true at the location of the EOS character. This flag is used to determine the end of a string and it can be set to true (using the pronite ground locations) at any page of the book.
 ## events_1
 ```mermaid
     flowchart TD
@@ -174,13 +197,13 @@ EOS character is a special character that is used to denote the end of a string.
         C -->|True| D[events_1_t]
         C -->|False| E[events_1_f]
 ```
-Checks if the flag is set at the address pointed to by `mem_1`. If the flag is set, then the traveller is teleported to the location events_1_t. Otherwise the traveller is teleported to the location events_1_f. These are actual landmarks and can be used in the program like any other landmark.
+Checks whether an EOS literal is present at `mem[mem_1]`. If the flag is set, then the traveller is teleported to the location events_1_t. Otherwise the traveller is teleported to the location events_1_f. These are actual landmarks and can be used in the program like any other landmark.
 
 ### events_1_t
-The traveller is teleported to this location if the flag is set at the address pointed to by `mem_1`.
+The traveller is teleported to this location if the condition specified in events_1 is true.
 
 ### events_1_f
-The traveller is teleported to this location if the flag is not set at the address pointed to by `mem_1`.
+The traveller is teleported to this location if the condition specified in events_1 is false.
 
 ## events_2
 ```mermaid
@@ -189,10 +212,10 @@ The traveller is teleported to this location if the flag is not set at the addre
         C -->|True| D[events_2_t]
         C -->|False| E[events_2_f]
 ```
-Checks if the flag is set at the address pointed to by `mem_2`. If the flag is set, then the traveller is teleported to the location events_2_t. Otherwise the traveller is teleported to the location events_2_f. These are actual landmarks and can be used in the program like any other landmark.
+Checks whether an EOS literal is present at `mem[mem_2]`. If the flag is set, then the traveller is teleported to the location events_2_t. Otherwise the traveller is teleported to the location events_2_f. These are actual landmarks and can be used in the program like any other landmark.
 
 ### events_2_t
-The traveller is teleported to this location if the flag is set at the address pointed to by `mem_2`.
+The traveller is teleported to this location if the condition specified in events_2 is true.
 
 ### events_2_f
-The traveller is teleported to this location if the flag is not set at the address pointed to by `mem_2`.
+The traveller is teleported to this location if the condition specified in events_2 is false.

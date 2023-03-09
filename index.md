@@ -16,7 +16,7 @@ Armed with your items, you take out your bicycle and decide to start planning yo
 # Overview
 
 ## Books
-Each magical book will be open at a particular page at any moment of time, and you can write one number at each page in the book. Since the books are magical, they have a pecuiliar property that writing any number on any page of one book automatically reflects in the other books as well. So, if you write, for example, the number 5 on page 4 of one book, turning to page 5 on any other book will also show the number 5. You can overwrite previously written numbers, the changes which will also be reflected to the other books. However, the page number you can have open in any book is independent of any other, only the contents are synchornized at all times. 
+Each magical book will be open at a particular page number at any moment of time and all the operations are done with respect to the value written on this page. This page number can be changed by visiting certain locations.Moreover only one number can be present at a page at any time. Initially all pages in all the books have 0 written on them. Since the books are magical, they have a pecuiliar property that writing any number on any page of one book automatically reflects in the other books as well. So, if you write, for example, the number 5 on page 4 of one book, turning to page 5 on any other book will also show the number 5. You can overwrite previously written numbers, the changes which will also be reflected to the other books. However, the page number you can have open in any book is independent of any other, only the contents are synchornized at all times. 
 
 If you are familiar with the terminology, you can visualize the three books are pointers on a memory tape of **infinite** length.
 
@@ -29,11 +29,11 @@ The page numbers in the books start from 0, and there are **infinite** pages in 
 {: .info}
 `mem[mem_1]` will denote the number written on page `mem_1` in any book.
 
-
 ## Compass
 
-The compass will guide your travels by telling you where to go next from any landmark. At any instant of time, the compass will display a number, which you can change on your own, or in the course of your travels. At any step in your journey, you can only travel next to a code line which has the condition value equal to the current value of the compass (also referred to as `cond`). **The default/initial value of the compass is 0.**
-There can only be one such code line from a particular landmark, and if there are multiple code lines from the same landmark with the same condition value, an error will be generated.
+The compass will guide your travels by telling you where to go next from any landmark. At any instant of time, the compass will display a number, which you can change be changed in the course of your travels. At every landmark there should be outgoing paths denoted with some number that you would take to travel to the next location. At any step in your journey, you can only take the path which is denoted by the number equal to the current value of the compass (also referred to as `cond`). **The default/initial value of the compass is 0.**
+
+If at a particular location there are multiple outgoing paths which match the current value of the compass, you are confused and get stuck at that location. Thus while setting the map you should make sure that such a situation never arises.
 
 ## Mysterious box
 
@@ -45,8 +45,8 @@ The following table contains the contents of the dictionary that you have been p
 | **IITK LANDMARK**           |          **COMMAND** |
 | start                   |          start |
 | finish                  |          finish |
-| iit_gate_in_1           |          input to mem[mem_1] |
-| iit_gate_in_2           |          input to mem[mem_2] |
+| iit_gate_in_1           |          integer input to mem[mem_1] |
+| iit_gate_in_2           |          integer input to mem[mem_2] |
 | hall_2                  |          mem[mem_3] = mem[mem_1] + mem[mem_2] |
 | hall_3                  |          mem[mem_3] = mem[mem_1] * mem[mem_2] |
 | hall_5                  |          mem[mem_3] = mem[mem_1] - mem[mem_2] |
@@ -68,10 +68,9 @@ The following table contains the contents of the dictionary that you have been p
 | lecture_hall_eq_f       |          path followed if lecture_hall_eq is false |
 | oat_stairs_1            |          mem[mem_1]++ |
 | oat_stairs_2            |          mem[mem_2]++ |
-| oat_stairs_c            |          cond++ |
 | southern_labs_1         |          mem[mem_1]-- |
 | southern_labs_2         |          mem[mem_2]-- |
-| southern_labs_c         |          cond-- |
+| oat_stage[i]            |          cond += i    |
 | hall_13_1               |          mem[mem_1] = 0 |
 | hall_13_2               |          mem[mem_2] = 0 |
 | hall_13_3               |          mem[mem_3] = 0 |
@@ -84,20 +83,31 @@ The following table contains the contents of the dictionary that you have been p
 | kd_3                    |          mem_3-- |
 | eshop_1                 |          mem[mem_1] = mem[mem_1] * mem[mem_1] |
 | eshop_2                 |          mem[mem_2] = mem[mem_2] * mem[mem_2] |
-| doaa_1                  |          Prints the ASCII value of the integer stored at mem[mem_1] |
-| doaa_2                  |          Prints the ASCII value of the integer stored at mem[mem_2] |
-| airstrip_land_1         |          Takes input of a string with each character being stored as an integer (ASCII Converted) incrementally starting at mem_1 |
-| airstrip_land_2         |          Takes input of a string with each character being stored as an integer (ASCII Converted) incrementally starting at mem_2 |
-| airstrip_takeoff_1      |          prints one character (conversion of int to ascii) at a time from mem[mem_1] until the flag is encountered|
-| airstrip_takeoff_2      |          prints one character (conversion of int to ascii) at a time from mem[mem_2] until the flag is encountered| 
-| pronite_1               |          mem_flag[mem_1] = 1;    
-| pronite_2               |          mem_flag[mem_2] = 1;                    
-| events_1                |          checks if there is a flag at mem1 location (mem_flag[mem_1] == 1). If yes, you are teleported to events_1_t, else to events_1_f. |         
-| events_1_t              |          Path followed if events_1 is true |
+| nankari_gate_in_1       |          Takes a single charcter as input and stores its ASCII value at mem[mem_1]
+| nankari_gate_in_2       |          Takes a single charcter as input and stores its ASCII value at mem[mem_2]
+| nankari_gate_out_1      |          Prints the character corresponding to the ASCII value stored at mem[mem_1]
+| nankari_gate_out_2      |          Prints the character corresponding to the ASCII value stored at mem[mem_2]
+| airstrip_land_1         |          Takes a string as input and stores the ASCII value of the i<sup>th</sup> (0 indexing) character at mem[mem_1 + i] ending with a special EOS character|
+| airstrip_land_2         |          Takes a string as input and stores the ASCII value of the i<sup>th</sup> (0 indexing) character at mem[mem_2 + i] ending with a special EOS character |
+| airstrip_takeoff_1      |          Prints a string where the i<sup>th</sup> (0 indexing) character corresponds to the ASCII value stored mem[mem_1 + i]. This operation terminates only when an EOS literal is encountered. |
+| airstrip_takeoff_2      |          Prints a string where the i<sup>th</sup> (0 indexing) character corresponds to the ASCII value stored mem[mem_2 + i]. This operation terminates only when an EOS literal is encountered. | 
+| pronite_1               |          Inserts an EOS literal at mem[mem_1]    
+| pronite_2               |          Inserts an EOS literal at mem[mem_2]                 
+| events_1                |          Checks whether an EOS literal is present at mem[mem_1]. If yes, you are teleported to events_1_t, else to events_1_f. |         
+| events_1_t              |          Path followed if events_1 is true  |
 | events_1_f              |          Path followed if events_1 is false |
-| events_2                |          checks if there is a flag at mem2 location (mem_flag[mem_2] == 1). If yes, you are teleported to events_2_t, else to events_2_f. |
-| events_2_t              |          Path followed if events_2 is true |
+| events_2                |          Checks whether an EOS literal is present at mem[mem_2]. If yes, you are teleported to events_2_t, else to events_2_f. |
+| events_2_t              |          Path followed if events_2 is true  |
 | events_2_f              |          Path followed if events_2 is false |
+
+{: .info}
+`oat_stage` is a special kind of location to which a parameter i is passed. To get more information regarding this location visit the Landmark Definition Section.
+
+{: .info}
+EOS character is a special character that is used to denote the end of a string and does not correspond to any valid signed 32-bit integer value. Hence the EOS value cannot be used in any mathematical operation.
+
+# Programming Specifications
+As a programmer, you have to set a map, specifically the outgoing paths from certain landmarks you wish to visit to produce the desired token (output) at the end of your journey. Then with help of the mysterious box you can simulate your journey to get an idea about the output produced as a result of the map.
 
 ## Syntax
 Each command consists of 3 comma-separated tokens ended with a newline.
@@ -107,14 +117,13 @@ Each command consists of 3 comma-separated tokens ended with a newline.
 - Finishing Landmark
 
 ## Execution Flow
-The execution flow can be visualized as traversing a graph following its edges. Your journey will start at the `start` node and will end as soon as the you reaches the `finish` node. Therefore each command represents a directed edge in the graph from the starting landmark to the finishing landmark. The condition value specifies which edge to be traversed from a particular node. 
+The execution flow can be visualized as traversing a graph following its edges. Your journey will start at the `start` node and will end as soon as the you reaches the `finish` node. Therefore each command represents path, which is a directed edge from the starting landmark to the finishing landmark. The condition value here is the number by which the path is denoted.
 
-Only the commands with condition value equal to the value of `cond` will be available to follow.
+When the traveller is present at any node, firstly the operation corresponding to that node is performed then the traveller travels to the next location taking the path corresponding to the current value of `cond`.
 
-If there is no valid path available, an error will be returned. 
+If at any node there is no path with value equal to the current value of `cond`, an error will be returned. 
 
-{: .info}
-The `start` and `finish` node must be present in the code otherwise an error will be generated.
+Moreover, as specified earlier, at any node there should not be more than one paths denoted by the same number (condition value).
 
 {: .info}
 The traversal should start at the `start` node and end at the `finish` node. The traversal ends as soon as you reach the `finish` node.
